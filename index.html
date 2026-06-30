@@ -1,342 +1,751 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gurpreet Kaur — Web Designer & Developer</title>
-<meta name="description" content="Portfolio of Gurpreet Kaur, web designer and developer from Punjab, India.">
+<title>Gurpreet Kaur — Web Designer &amp; Developer</title>
+<meta name="description" content="Gurpreet Kaur is a web designer and developer from Singh Bhagwantpur, Punjab, India, crafting warm, usable interfaces.">
+<meta name="theme-color" content="#FBF6EF">
+<meta property="og:title" content="Gurpreet Kaur — Web Designer & Developer">
+<meta property="og:description" content="Portfolio of Gurpreet Kaur, web designer and developer from Punjab, India.">
+<meta property="og:type" content="website">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <script>
   tailwind.config = {
+    darkMode: 'class',
     theme: {
       extend: {
         colors: {
-          ink: '#221A22',
-          clay: '#C1502E',
-          rust: '#8C3B26',
-          sand: '#FBF7F0',
-          sandDeep: '#F0E6D6',
-          teal: '#2F5D5A',
-          gold: '#D9A441',
+          ink:      '#1F1A17',
+          inkSoft:  '#3A322D',
+          clay:     '#B9543A',
+          copper:   '#A8632E',
+          sand:     '#FBF6EF',
+          sandDeep: '#F2E9DA',
+          gold:     '#D9A441',
+          teal:     '#2F5D5A',
         },
         fontFamily: {
           display: ['Fraunces', 'serif'],
           body: ['Inter', 'sans-serif'],
         },
+        boxShadow: {
+          soft: '0 30px 60px -30px rgba(31,26,23,.35)',
+          lift: '0 18px 40px -16px rgba(31,26,23,.25)',
+        },
       },
     },
   };
 </script>
-<style>
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background-color: #FBF6EF; }
-  .font-display { font-family: 'Fraunces', serif; }
 
+<style>
+  /* ---------- Base ---------- */
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FBF6EF;
+    color: #1F1A17;
+    transition: background-color .4s ease, color .4s ease;
+  }
+  html.dark body { background-color: #15110F; color: #F2E9DA; }
+  .font-display { font-family: 'Fraunces', serif; }
   ::selection { background: #B9543A; color: #FBF6EF; }
 
-  /* Scroll reveal */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.active { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1.active { transition-delay: .08s; }
-  .reveal-delay-2.active { transition-delay: .16s; }
-  .reveal-delay-3.active { transition-delay: .24s; }
+  /* ---------- Loading screen ---------- */
+  #loader {
+    position: fixed; inset: 0; z-index: 100; background: #FBF6EF;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity .6s ease, visibility .6s ease;
+  }
+  html.dark #loader { background: #15110F; }
+  #loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+  .loader-mark { font-family: 'Fraunces', serif; font-size: 1.6rem; letter-spacing: .02em; overflow: hidden; white-space: nowrap; border-right: 2px solid #B9543A; animation: loaderType 1.1s steps(11) forwards, loaderBlink .8s step-end infinite; }
+  @keyframes loaderType { from { width: 0 } to { width: 11ch } }
+  @keyframes loaderBlink { 50% { border-color: transparent } }
 
-  /* Signature underline */
+  /* ---------- Scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); filter: blur(6px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1), filter .8s ease; }
+  .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
+  .reveal-delay-1.active { transition-delay: .1s; }
+  .reveal-delay-2.active { transition-delay: .2s; }
+  .reveal-delay-3.active { transition-delay: .3s; }
+  .reveal-delay-4.active { transition-delay: .4s; }
+
+  /* ---------- Signature underline ---------- */
   .ink-underline { position: relative; display: inline-block; }
-  .ink-underline svg { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; }
+  .ink-underline svg { position: absolute; left: 0; bottom: -4px; width: 100%; height: 12px; overflow: visible; }
+  .ink-underline path { stroke-dasharray: 220; stroke-dashoffset: 220; animation: drawLine 1.1s ease forwards .9s; }
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
 
-  /* Number eyebrow rule */
-  .rule { height: 1px; background: linear-gradient(90deg, #B9543A 0%, transparent 100%); }
-
-  /* Marquee */
-  .marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+  /* ---------- Marquee ---------- */
+  .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+  .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* Card hover lift */
-  .lift { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease; }
-  .lift:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -16px rgba(36,27,31,.25); }
+  /* ---------- Lift / tilt cards ---------- */
+  .lift { transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .4s ease; will-change: transform; }
+  .lift:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -16px rgba(31,26,23,.25); }
 
-  /* Cursor dot follower for hero (decorative, desktop only) */
-  .grain::before{
-    content:"";
-    position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* ---------- Magnetic buttons ---------- */
+  .magnetic { transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+
+  /* ---------- Grain ---------- */
+  .grain { position: relative; }
+  .grain::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .045; mix-blend-mode: multiply; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+  html.dark .grain::before { mix-blend-mode: overlay; opacity: .06; }
+
+  /* ---------- Spotlight cursor (decorative, desktop only) ---------- */
+  #spotlight {
+    position: fixed; width: 480px; height: 480px; border-radius: 9999px; pointer-events: none; z-index: 1;
+    background: radial-gradient(circle, rgba(185,84,58,.10) 0%, rgba(185,84,58,0) 70%);
+    transform: translate(-50%, -50%); transition: opacity .3s ease; opacity: 0;
+  }
+  @media (hover:hover) and (pointer:fine) { #spotlight.active { opacity: 1; } }
+
+  /* ---------- Skill bars ---------- */
+  .skill-bar { width: 0%; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+
+  /* ---------- Floating badge bob ---------- */
+  .float-bob { animation: bob 5s ease-in-out infinite; }
+  .float-bob-slow { animation: bob 7s ease-in-out infinite; animation-delay: 1s; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  /* ---------- Availability pulse ---------- */
+  .pulse-dot::before {
+    content: ""; position: absolute; inset: 0; border-radius: 9999px; background: currentColor;
+    animation: pulseRing 1.8s cubic-bezier(.2,.7,.2,1) infinite;
+  }
+  @keyframes pulseRing { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.4); opacity: 0; } }
+
+  /* ---------- Nav underline ---------- */
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 1.5px; background: #B9543A; transition: width .3s ease;
+  }
+  .nav-link:hover::after, .nav-link.active-link::after { width: 100%; }
+
+  /* ---------- Mobile fullscreen nav ---------- */
+  #mobileMenu { clip-path: circle(0% at calc(100% - 2.5rem) 2.5rem); transition: clip-path .55s cubic-bezier(.7,0,.3,1); }
+  #mobileMenu.open { clip-path: circle(150% at calc(100% - 2.5rem) 2.5rem); }
+
+  /* ---------- Form success check ---------- */
+  .check-draw path { stroke-dasharray: 40; stroke-dashoffset: 40; animation: checkDraw .5s ease forwards .15s; }
+  @keyframes checkDraw { to { stroke-dashoffset: 0; } }
+
+  /* ---------- Accordion ---------- */
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .acc-icon { transform: rotate(45deg); }
+  .acc-icon { transition: transform .3s ease; }
+  details .acc-body { animation: accIn .35s ease; }
+  @keyframes accIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ---------- Counter ---------- */
+  .stat-num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- Focus states ---------- */
+  a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #B9543A; outline-offset: 3px; border-radius: 4px;
+  }
+
+  /* ---------- Section divider ---------- */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent 0%, currentColor 50%, transparent 100%); opacity: .15; }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
     .marquee-track { animation: none; }
-  }
-
-  /* visible focus states */
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid #B9543A; outline-offset: 3px; border-radius: 2px;
+    .float-bob, .float-bob-slow { animation: none; }
+    .loader-mark { animation: none; width: 11ch; }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
-<body class="text-ink antialiased">
+<body class="text-ink antialiased dark:text-sandDeep selection:bg-clay selection:text-sand">
 
-<!-- progress bar -->
-<div id="progress" class="fixed top-0 left-0 h-[3px] bg-clay z-[60]" style="width:0%"></div>
+<!-- ============ LOADING SCREEN ============ -->
+<div id="loader" aria-hidden="true">
+  <span class="loader-mark text-ink dark:text-sand">Gurpreet Kaur</span>
+</div>
 
-<!-- HEADER -->
-<header class="fixed top-0 w-full z-50 bg-sand/85 backdrop-blur-md border-b border-ink/10">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-    <a href="#home" class="font-display text-xl tracking-tight">Gurpreet Kaur</a>
+<!-- ============ SCROLL PROGRESS ============ -->
+<div id="progress" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-clay via-gold to-teal z-[70]" style="width:0%" role="progressbar" aria-hidden="true"></div>
 
-    <nav class="hidden md:flex items-center gap-10 font-medium text-sm">
-      <a href="#about" class="hover:text-clay transition-colors">About</a>
-      <a href="#work" class="hover:text-clay transition-colors">Expertise</a>
-      <a href="#contact" class="hover:text-clay transition-colors">Contact</a>
-      <a href="#contact" class="px-4 py-2 rounded-full bg-ink text-sand hover:bg-clay transition-colors">Get in touch</a>
-    </nav>
+<!-- ============ CURSOR SPOTLIGHT (decorative) ============ -->
+<div id="spotlight" aria-hidden="true"></div>
 
-    <button id="menuBtn" aria-label="Open menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
-      <span class="block w-6 h-[2px] bg-ink transition-all" id="bar1"></span>
-      <span class="block w-6 h-[2px] bg-ink transition-all" id="bar2"></span>
-      <span class="block w-6 h-[2px] bg-ink transition-all" id="bar3"></span>
-    </button>
+<!-- ============ HEADER / NAV ============ -->
+<header class="fixed top-0 w-full z-50">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 mt-3">
+    <div class="flex items-center justify-between h-16 px-5 sm:px-6 rounded-full bg-sand/75 dark:bg-ink/60 backdrop-blur-xl border border-ink/10 dark:border-sand/10 shadow-[0_8px_30px_-15px_rgba(31,26,23,.25)]">
+
+      <a href="#home" class="font-display text-lg sm:text-xl tracking-tight">Gurpreet<span class="text-clay">.</span></a>
+
+      <nav class="hidden md:flex items-center gap-9 font-medium text-sm" aria-label="Primary">
+        <a href="#about" class="nav-link" data-nav>About</a>
+        <a href="#work" class="nav-link" data-nav>Expertise</a>
+        <a href="#faq" class="nav-link" data-nav>FAQ</a>
+        <a href="#contact" class="nav-link" data-nav>Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <!-- Dark mode toggle -->
+        <button id="themeToggle" type="button" aria-label="Toggle dark mode" class="w-10 h-10 rounded-full grid place-items-center border border-ink/10 dark:border-sand/15 hover:border-clay transition-colors">
+          <svg id="iconSun" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg id="iconMoon" class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+        </button>
+
+        <a href="#contact" class="magnetic hidden md:inline-block px-5 py-2.5 rounded-full bg-ink text-sand dark:bg-sand dark:text-ink font-medium text-sm hover:bg-clay dark:hover:bg-clay dark:hover:text-sand transition-colors">Get in touch</a>
+
+        <button id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5">
+          <span class="block w-5 h-[2px] bg-ink dark:bg-sand transition-all" id="bar1"></span>
+          <span class="block w-5 h-[2px] bg-ink dark:bg-sand transition-all" id="bar2"></span>
+          <span class="block w-5 h-[2px] bg-ink dark:bg-sand transition-all" id="bar3"></span>
+        </button>
+      </div>
+    </div>
   </div>
 
-  <!-- mobile menu -->
-  <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out border-t border-ink/10 bg-sand">
-    <nav class="flex flex-col px-6 py-4 gap-4 font-medium">
-      <a href="#about" class="py-1">About</a>
-      <a href="#work" class="py-1">Expertise</a>
-      <a href="#contact" class="py-1">Contact</a>
+  <!-- Mobile fullscreen menu -->
+  <div id="mobileMenu" class="md:hidden fixed inset-0 bg-ink text-sand z-40 flex flex-col items-center justify-center gap-8">
+    <nav class="flex flex-col items-center gap-7 text-3xl font-display" aria-label="Mobile">
+      <a href="#about" data-nav-mobile>About</a>
+      <a href="#work" data-nav-mobile>Expertise</a>
+      <a href="#faq" data-nav-mobile>FAQ</a>
+      <a href="#contact" data-nav-mobile>Contact</a>
     </nav>
+    <a href="mailto:shehzaadi2010@gmail.com" class="mt-4 text-sand/60 text-sm tracking-wide">shehzaadi2010@gmail.com</a>
   </div>
 </header>
 
-<!-- HERO -->
-<section id="home" class="relative grain overflow-hidden min-h-screen flex items-center pt-16">
-  <div class="absolute -top-20 -right-32 w-[460px] h-[460px] rounded-full bg-clay/10 blur-3xl"></div>
-  <div class="absolute bottom-0 -left-20 w-[320px] h-[320px] rounded-full bg-teal/10 blur-3xl"></div>
+<!-- ============ HERO ============ -->
+<section id="home" class="relative grain overflow-hidden min-h-[100svh] flex items-center pt-24 pb-16">
 
-  <div class="max-w-6xl mx-auto px-6 md:px-10 w-full grid md:grid-cols-12 gap-10 items-center relative z-10">
+  <!-- abstract gradient blobs -->
+  <div id="blobA" class="absolute -top-32 -right-40 w-[520px] h-[520px] rounded-full bg-clay/15 dark:bg-clay/20 blur-3xl"></div>
+  <div id="blobB" class="absolute bottom-0 -left-32 w-[380px] h-[380px] rounded-full bg-teal/15 dark:bg-teal/25 blur-3xl"></div>
+  <div id="blobC" class="absolute top-1/3 left-1/2 w-[280px] h-[280px] rounded-full bg-gold/15 blur-3xl"></div>
 
-    <div class="md:col-span-8">
-      <p class="reveal flex items-center gap-3 text-sm font-medium text-clay mb-6 uppercase tracking-[0.2em]">
+  <!-- decorative SVG -->
+  <svg class="absolute top-28 left-6 w-20 h-20 text-clay/30 hidden lg:block" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="1" stroke-dasharray="4 6"/>
+  </svg>
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 w-full grid md:grid-cols-12 gap-12 items-center relative z-10">
+
+    <div class="md:col-span-7">
+      <p class="reveal flex items-center gap-3 text-xs sm:text-sm font-semibold text-clay mb-6 uppercase tracking-[0.25em]">
         <span class="w-8 h-px bg-clay"></span> Web Designer &amp; Developer · Punjab, India
       </p>
 
-      <h1 class="reveal reveal-delay-1 font-display text-[2.6rem] leading-[1.08] sm:text-6xl md:text-7xl font-medium tracking-tight">
+      <h1 class="reveal reveal-delay-1 font-display text-[2.5rem] leading-[1.05] sm:text-6xl md:text-[4.4rem] font-medium tracking-tight">
         I design and build
         <span class="ink-underline">
           warm, usable
-          <svg viewBox="0 0 200 10" preserveAspectRatio="none"><path d="M2 7 C 50 1, 150 1, 198 7" stroke="#B9543A" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 200 10" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 50 1, 150 1, 198 7" stroke="#B9543A" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
         </span>
         interfaces.
       </h1>
 
-      <p class="reveal reveal-delay-2 mt-7 text-lg text-ink/70 max-w-xl leading-relaxed">
+      <p class="reveal reveal-delay-2 mt-7 text-lg text-ink/70 dark:text-sand/70 max-w-xl leading-relaxed">
         I'm Gurpreet — a 19-year-old developer from Singh Bhagwantpur, Punjab, turning early curiosity about computers into clean, considered websites.
       </p>
 
       <div class="reveal reveal-delay-3 mt-9 flex flex-wrap items-center gap-4">
-        <a href="#contact" class="px-7 py-3.5 rounded-full bg-ink text-sand font-medium hover:bg-clay transition-colors">Start a project</a>
-        <a href="#work" class="px-7 py-3.5 rounded-full border border-ink/20 font-medium hover:border-clay hover:text-clay transition-colors">See my expertise</a>
+        <a href="#contact" class="magnetic group relative px-7 py-3.5 rounded-full bg-ink text-sand dark:bg-sand dark:text-ink font-medium overflow-hidden">
+          <span class="relative z-10 transition-colors group-hover:text-sand">Start a project</span>
+          <span class="absolute inset-0 bg-clay scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+        </a>
+        <a href="#work" class="magnetic px-7 py-3.5 rounded-full border border-ink/20 dark:border-sand/25 font-medium hover:border-clay hover:text-clay transition-colors">See my expertise</a>
       </div>
-    </div>
 
-    <div class="md:col-span-4 reveal reveal-delay-2">
-      <div class="relative rounded-[28px] overflow-hidden border border-ink/10 shadow-[0_30px_60px_-30px_rgba(34,26,34,.4)] aspect-[4/5]">
-        <img src="gurpreet.png" alt="Portrait of Gurpreet Kaur" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/0 to-ink/0"></div>
-        <div class="absolute bottom-0 left-0 right-0 p-5 text-sand">
-          <p class="font-display text-2xl leading-none">Gurpreet Kaur</p>
-          <p class="text-xs text-sand/75 mt-1 uppercase tracking-[0.15em]">Web Designer &amp; Developer</p>
+      <!-- availability + social -->
+      <div class="reveal reveal-delay-4 mt-10 flex flex-wrap items-center gap-6">
+        <span class="relative inline-flex items-center gap-2 text-sm font-medium text-teal dark:text-gold">
+          <span class="relative inline-flex w-2 h-2"><span class="pulse-dot absolute inline-flex w-2 h-2 rounded-full text-teal dark:text-gold"></span><span class="relative w-2 h-2 rounded-full bg-current"></span></span>
+          Available for freelance work
+        </span>
+        <div class="flex items-center gap-4 text-ink/50 dark:text-sand/50">
+          <a href="mailto:shehzaadi2010@gmail.com" aria-label="Email Gurpreet" class="hover:text-clay transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6 9-6M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>
+          </a>
         </div>
       </div>
     </div>
 
+    <!-- portrait -->
+    <div class="md:col-span-5 reveal reveal-delay-2">
+      <div class="relative">
+        <div class="absolute -inset-6 rounded-[36px] bg-gradient-to-br from-clay/30 via-gold/20 to-teal/20 blur-2xl"></div>
+        <div class="relative rounded-[28px] overflow-hidden border border-ink/10 dark:border-sand/10 shadow-soft aspect-[4/5]">
+          <img src="gurpreet.png" alt="Portrait of Gurpreet Kaur" class="w-full h-full object-cover" loading="eager" width="480" height="600" />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/0 to-ink/0"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5 text-sand">
+            <p class="font-display text-2xl leading-none">Gurpreet Kaur</p>
+            <p class="text-xs text-sand/75 mt-1 uppercase tracking-[0.15em]">Web Designer &amp; Developer</p>
+          </div>
+        </div>
+
+        <!-- floating badges -->
+        <div class="float-bob absolute -left-8 top-10 hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-sand/90 dark:bg-ink/90 backdrop-blur border border-ink/10 dark:border-sand/15 shadow-lift">
+          <span class="font-display text-xl text-clay">12th</span>
+          <span class="text-xs text-ink/60 dark:text-sand/60 leading-tight">Govt. Senior<br>Secondary School</span>
+        </div>
+        <div class="float-bob-slow absolute -right-6 -bottom-6 hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-sand/90 dark:bg-ink/90 backdrop-blur border border-ink/10 dark:border-sand/15 shadow-lift">
+          <span class="text-xs text-ink/60 dark:text-sand/60 leading-tight">SIMT<br>Certified</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <a href="#about" aria-label="Scroll to about section" class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-xs text-ink/50">
-    <span>Scroll</span>
-    <span class="w-px h-8 bg-ink/30 animate-pulse"></span>
+  <a href="#about" aria-label="Scroll to about section" class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-xs text-ink/45 dark:text-sand/45">
+    <span class="tracking-[0.15em] uppercase">Scroll</span>
+    <span class="w-px h-9 bg-current/40 relative overflow-hidden"><span class="absolute inset-x-0 top-0 h-3 bg-clay animate-[bob_1.6s_ease-in-out_infinite]"></span></span>
   </a>
 </section>
 
 <!-- marquee strip -->
-<div class="border-y border-ink/10 bg-ink text-sand py-3 overflow-hidden">
+<div class="marquee-wrap border-y border-ink/10 dark:border-sand/10 bg-ink dark:bg-sand text-sand dark:text-ink py-3 overflow-hidden">
   <div class="marquee-track text-sm tracking-[0.25em] uppercase font-medium">
-    <span class="px-6">UI / UX Design</span><span class="px-6">·</span>
-    <span class="px-6">Web Development</span><span class="px-6">·</span>
-    <span class="px-6">Interaction &amp; Motion</span><span class="px-6">·</span>
-    <span class="px-6">Responsive Builds</span><span class="px-6">·</span>
-    <span class="px-6">UI / UX Design</span><span class="px-6">·</span>
-    <span class="px-6">Web Development</span><span class="px-6">·</span>
-    <span class="px-6">Interaction &amp; Motion</span><span class="px-6">·</span>
-    <span class="px-6">Responsive Builds</span><span class="px-6">·</span>
+    <span class="px-6">UI / UX Design</span><span class="px-6 text-clay">·</span>
+    <span class="px-6">Web Development</span><span class="px-6 text-clay">·</span>
+    <span class="px-6">Interaction &amp; Motion</span><span class="px-6 text-clay">·</span>
+    <span class="px-6">Responsive Builds</span><span class="px-6 text-clay">·</span>
+    <span class="px-6">UI / UX Design</span><span class="px-6 text-clay">·</span>
+    <span class="px-6">Web Development</span><span class="px-6 text-clay">·</span>
+    <span class="px-6">Interaction &amp; Motion</span><span class="px-6 text-clay">·</span>
+    <span class="px-6">Responsive Builds</span><span class="px-6 text-clay">·</span>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about" class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
-  <div class="grid md:grid-cols-12 gap-12 mb-14">
-
+<!-- ============ ABOUT ============ -->
+<section id="about" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 md:py-32 scroll-mt-24">
+  <div class="grid md:grid-cols-12 gap-12 mb-16">
     <div class="md:col-span-4 reveal">
-      <p class="text-sm font-medium text-clay uppercase tracking-[0.2em] mb-3">About</p>
+      <p class="text-xs sm:text-sm font-semibold text-clay uppercase tracking-[0.25em] mb-3">About</p>
       <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight">From a Punjab village to the web.</h2>
     </div>
 
     <div class="md:col-span-8 reveal reveal-delay-1 grid sm:grid-cols-[auto_1fr] gap-8 items-start">
-      <div class="hidden sm:block w-32 h-32 rounded-2xl overflow-hidden border border-ink/10 shrink-0">
-        <img src="gurpreet.png" alt="Gurpreet Kaur" class="w-full h-full object-cover" />
+      <div class="hidden sm:block w-32 h-32 rounded-2xl overflow-hidden border border-ink/10 dark:border-sand/10 shrink-0 shadow-lift">
+        <img src="gurpreet.png" alt="Gurpreet Kaur" class="w-full h-full object-cover" loading="lazy" width="128" height="128" />
       </div>
       <div>
-        <p class="text-lg leading-relaxed text-ink/75">
+        <p class="text-lg leading-relaxed text-ink/75 dark:text-sand/75">
           I grew up in Singh Bhagwantpur, a village in Roopnagar, Punjab, and completed my 12th standard at the local Government Senior Secondary School. Technology pulled me in early — not as a subject to study, but as a way of making things people actually use.
         </p>
-        <p class="text-lg leading-relaxed text-ink/75 mt-5">
+        <p class="text-lg leading-relaxed text-ink/75 dark:text-sand/75 mt-5">
           That curiosity led me to computing training at the Sainik Institute of Management and Technology, where I started learning web development properly: structuring pages, writing clean code, and caring about how an interface feels, not just how it looks.
         </p>
       </div>
     </div>
-
   </div>
 
-  <div class="reveal reveal-delay-1">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
-          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Based in</p>
-          <p class="font-display text-xl">Roopnagar, Punjab</p>
-        </div>
-        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
-          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Education</p>
-          <p class="font-display text-xl">12th Standard, GSSS</p>
-        </div>
-        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
-          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Training</p>
-          <p class="font-display text-xl">SIMT Certified</p>
-        </div>
-        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
-          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Focus</p>
-          <p class="font-display text-xl">Web Design &amp; Dev</p>
-        </div>
-      </div>
+  <!-- timeline -->
+  <div class="reveal reveal-delay-1 mb-16">
+    <ol class="relative border-l border-ink/15 dark:border-sand/15 ml-2 sm:ml-4 space-y-10">
+      <li class="pl-8 relative">
+        <span class="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-clay ring-4 ring-sand dark:ring-[#15110F]"></span>
+        <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Growing up</p>
+        <h3 class="font-display text-xl mb-1">Singh Bhagwantpur, Roopnagar</h3>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed max-w-xl">An early curiosity about computers — taking apart how things worked rather than just using them.</p>
+      </li>
+      <li class="pl-8 relative">
+        <span class="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-teal ring-4 ring-sand dark:ring-[#15110F]"></span>
+        <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Education</p>
+        <h3 class="font-display text-xl mb-1">12th Standard, Govt. Senior Secondary School</h3>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed max-w-xl">Finished schooling locally while curiosity about the web kept building in the background.</p>
+      </li>
+      <li class="pl-8 relative">
+        <span class="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-gold ring-4 ring-sand dark:ring-[#15110F]"></span>
+        <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Training</p>
+        <h3 class="font-display text-xl mb-1">Sainik Institute of Management &amp; Technology</h3>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed max-w-xl">Learned web development properly — structuring pages, writing clean code, designing with intent.</p>
+      </li>
+      <li class="pl-8 relative">
+        <span class="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-ink dark:bg-sand ring-4 ring-sand dark:ring-[#15110F]"></span>
+        <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Today</p>
+        <h3 class="font-display text-xl mb-1">Building considered websites</h3>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed max-w-xl">Designing and developing interfaces that feel warm, clear, and genuinely usable.</p>
+      </li>
+    </ol>
+  </div>
+
+  <!-- stats -->
+  <div class="reveal reveal-delay-2 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="lift rounded-2xl border border-ink/10 dark:border-sand/10 bg-white/70 dark:bg-sand/[0.04] p-6">
+      <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Based in</p>
+      <p class="font-display text-xl">Roopnagar, Punjab</p>
+    </div>
+    <div class="lift rounded-2xl border border-ink/10 dark:border-sand/10 bg-white/70 dark:bg-sand/[0.04] p-6">
+      <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Age</p>
+      <p class="font-display text-xl"><span class="stat-num" data-count="19">0</span> years old</p>
+    </div>
+    <div class="lift rounded-2xl border border-ink/10 dark:border-sand/10 bg-white/70 dark:bg-sand/[0.04] p-6">
+      <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Training</p>
+      <p class="font-display text-xl">SIMT Certified</p>
+    </div>
+    <div class="lift rounded-2xl border border-ink/10 dark:border-sand/10 bg-white/70 dark:bg-sand/[0.04] p-6">
+      <p class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50 mb-1">Focus areas</p>
+      <p class="font-display text-xl"><span class="stat-num" data-count="6">0</span> core skills</p>
+    </div>
   </div>
 </section>
 
-<!-- EXPERTISE -->
-<section id="work" class="bg-sandDeep border-y border-ink/10">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+<div class="max-w-6xl mx-auto px-5 sm:px-8"><div class="divider text-ink dark:text-sand"></div></div>
+
+<!-- ============ EXPERTISE / SKILLS ============ -->
+<section id="work" class="bg-sandDeep dark:bg-sand/[0.03] border-y border-ink/10 dark:border-sand/10 scroll-mt-24">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-24 md:py-32">
 
     <div class="reveal max-w-xl mb-16">
-      <p class="text-sm font-medium text-clay uppercase tracking-[0.2em] mb-3">Expertise</p>
+      <p class="text-xs sm:text-sm font-semibold text-clay uppercase tracking-[0.25em] mb-3">Expertise</p>
       <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight">What I bring to a project.</h2>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
 
-      <div class="reveal lift rounded-3xl bg-white p-8 border border-ink/10">
-        <span class="font-display text-3xl text-clay">01</span>
+      <article class="reveal lift group rounded-3xl bg-white dark:bg-ink/40 p-8 border border-ink/10 dark:border-sand/10">
+        <div class="flex items-start justify-between">
+          <span class="font-display text-3xl text-clay">01</span>
+          <svg class="w-6 h-6 text-ink/20 dark:text-sand/20 group-hover:text-clay group-hover:rotate-12 transition-all" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m0 6v4a2 2 0 002 2h4m6 0h4a2 2 0 002-2v-4m0-6V5a2 2 0 00-2-2h-4"/></svg>
+        </div>
         <h3 class="font-display text-2xl mt-4 mb-3">UI / UX Design</h3>
-        <p class="text-ink/65 leading-relaxed">Interfaces planned around how people actually navigate — clear hierarchy, readable type, and layouts that hold up on any screen.</p>
-      </div>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed mb-5">Interfaces planned around how people actually navigate — clear hierarchy, readable type, and layouts that hold up on any screen.</p>
+        <div class="h-1.5 w-full rounded-full bg-ink/10 dark:bg-sand/10 overflow-hidden"><div class="skill-bar h-full rounded-full bg-clay" data-level="92"></div></div>
+      </article>
 
-      <div class="reveal reveal-delay-1 lift rounded-3xl bg-white p-8 border border-ink/10">
-        <span class="font-display text-3xl text-teal">02</span>
+      <article class="reveal reveal-delay-1 lift group rounded-3xl bg-white dark:bg-ink/40 p-8 border border-ink/10 dark:border-sand/10">
+        <div class="flex items-start justify-between">
+          <span class="font-display text-3xl text-teal">02</span>
+          <svg class="w-6 h-6 text-ink/20 dark:text-sand/20 group-hover:text-teal group-hover:rotate-12 transition-all" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l-4 3 4 3m8-6l4 3-4 3M13 5l-2 14"/></svg>
+        </div>
         <h3 class="font-display text-2xl mt-4 mb-3">Web Development</h3>
-        <p class="text-ink/65 leading-relaxed">Clean, semantic HTML, CSS and JavaScript built for performance and maintainability — from static sites to interactive pages.</p>
-      </div>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed mb-5">Clean, semantic HTML, CSS and JavaScript built for performance and maintainability — from static sites to interactive pages.</p>
+        <div class="h-1.5 w-full rounded-full bg-ink/10 dark:bg-sand/10 overflow-hidden"><div class="skill-bar h-full rounded-full bg-teal" data-level="88"></div></div>
+      </article>
 
-      <div class="reveal reveal-delay-2 lift rounded-3xl bg-white p-8 border border-ink/10">
-        <span class="font-display text-3xl text-gold">03</span>
+      <article class="reveal reveal-delay-2 lift group rounded-3xl bg-white dark:bg-ink/40 p-8 border border-ink/10 dark:border-sand/10">
+        <div class="flex items-start justify-between">
+          <span class="font-display text-3xl text-gold">03</span>
+          <svg class="w-6 h-6 text-ink/20 dark:text-sand/20 group-hover:text-gold group-hover:rotate-12 transition-all" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
         <h3 class="font-display text-2xl mt-4 mb-3">Motion &amp; Interaction</h3>
-        <p class="text-ink/65 leading-relaxed">Purposeful animation — scroll reveals, hover states, transitions — used to guide attention, not distract from it.</p>
-      </div>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed mb-5">Purposeful animation — scroll reveals, hover states, transitions — used to guide attention, not distract from it.</p>
+        <div class="h-1.5 w-full rounded-full bg-ink/10 dark:bg-sand/10 overflow-hidden"><div class="skill-bar h-full rounded-full bg-gold" data-level="85"></div></div>
+      </article>
 
-      <div class="reveal lift rounded-3xl bg-white p-8 border border-ink/10">
-        <span class="font-display text-3xl text-rust">04</span>
+      <article class="reveal lift group rounded-3xl bg-white dark:bg-ink/40 p-8 border border-ink/10 dark:border-sand/10">
+        <div class="flex items-start justify-between">
+          <span class="font-display text-3xl text-copper">04</span>
+          <svg class="w-6 h-6 text-ink/20 dark:text-sand/20 group-hover:text-copper group-hover:rotate-12 transition-all" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path stroke-linecap="round" d="M8 20h8"/></svg>
+        </div>
         <h3 class="font-display text-2xl mt-4 mb-3">Responsive Layouts</h3>
-        <p class="text-ink/65 leading-relaxed">Designs that adapt cleanly from a small phone screen to a wide desktop, with Tailwind-driven, mobile-first builds.</p>
-      </div>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed mb-5">Designs that adapt cleanly from a small phone screen to a wide desktop, with Tailwind-driven, mobile-first builds.</p>
+        <div class="h-1.5 w-full rounded-full bg-ink/10 dark:bg-sand/10 overflow-hidden"><div class="skill-bar h-full rounded-full bg-copper" data-level="90"></div></div>
+      </article>
 
-      <div class="reveal reveal-delay-1 lift rounded-3xl bg-white p-8 border border-ink/10">
-        <span class="font-display text-3xl text-clay">05</span>
+      <article class="reveal reveal-delay-1 lift group rounded-3xl bg-white dark:bg-ink/40 p-8 border border-ink/10 dark:border-sand/10">
+        <div class="flex items-start justify-between">
+          <span class="font-display text-3xl text-clay">05</span>
+          <svg class="w-6 h-6 text-ink/20 dark:text-sand/20 group-hover:text-clay group-hover:rotate-12 transition-all" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M3 12h18M12 3a14 14 0 010 18 14 14 0 010-18z"/></svg>
+        </div>
         <h3 class="font-display text-2xl mt-4 mb-3">Branding &amp; Visual Identity</h3>
-        <p class="text-ink/65 leading-relaxed">Cohesive colour, type and imagery choices that give a site a personality of its own rather than a templated look.</p>
-      </div>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed mb-5">Cohesive colour, type and imagery choices that give a site a personality of its own rather than a templated look.</p>
+        <div class="h-1.5 w-full rounded-full bg-ink/10 dark:bg-sand/10 overflow-hidden"><div class="skill-bar h-full rounded-full bg-clay" data-level="80"></div></div>
+      </article>
 
-      <div class="reveal reveal-delay-2 lift rounded-3xl bg-white p-8 border border-ink/10">
-        <span class="font-display text-3xl text-teal">06</span>
+      <article class="reveal reveal-delay-2 lift group rounded-3xl bg-white dark:bg-ink/40 p-8 border border-ink/10 dark:border-sand/10">
+        <div class="flex items-start justify-between">
+          <span class="font-display text-3xl text-teal">06</span>
+          <svg class="w-6 h-6 text-ink/20 dark:text-sand/20 group-hover:text-teal group-hover:rotate-12 transition-all" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
         <h3 class="font-display text-2xl mt-4 mb-3">Performance &amp; Best Practices</h3>
-        <p class="text-ink/65 leading-relaxed">Accessible markup, sensible image handling, and lean code that keeps pages fast and easy to maintain.</p>
-      </div>
+        <p class="text-ink/65 dark:text-sand/65 leading-relaxed mb-5">Accessible markup, sensible image handling, and lean code that keeps pages fast and easy to maintain.</p>
+        <div class="h-1.5 w-full rounded-full bg-ink/10 dark:bg-sand/10 overflow-hidden"><div class="skill-bar h-full rounded-full bg-teal" data-level="93"></div></div>
+      </article>
 
+    </div>
+
+    <!-- currently learning -->
+    <div class="reveal mt-14 flex flex-wrap items-center gap-3">
+      <span class="text-xs uppercase tracking-[0.15em] text-ink/50 dark:text-sand/50">Currently exploring</span>
+      <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-ink/5 dark:bg-sand/10 border border-ink/10 dark:border-sand/10">Advanced JavaScript</span>
+      <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-ink/5 dark:bg-sand/10 border border-ink/10 dark:border-sand/10">Animation &amp; Motion Design</span>
+      <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-ink/5 dark:bg-sand/10 border border-ink/10 dark:border-sand/10">Accessible Design Systems</span>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
-  <div class="rounded-[32px] bg-ink text-sand px-8 py-16 md:px-16 md:py-20 text-center relative overflow-hidden reveal">
-    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-clay/20 blur-3xl"></div>
-    <p class="text-sm font-medium text-clay uppercase tracking-[0.2em] mb-4 relative">Let's connect</p>
-    <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight max-w-2xl mx-auto relative">
-      Have a project in mind? I'd love to hear about it.
-    </h2>
-    <p class="mt-5 text-sand/70 max-w-lg mx-auto relative">
-      I'm open to creative collaborations, freelance web projects, and new opportunities.
-    </p>
-    <a href="mailto:shehzaadi2010@gmail.com" class="relative inline-block mt-9 px-8 py-4 rounded-full bg-sand text-ink font-medium hover:bg-clay hover:text-sand transition-colors">
-      Send me an email
-    </a>
+<!-- ============ FAQ ============ -->
+<section id="faq" class="max-w-3xl mx-auto px-5 sm:px-8 py-24 md:py-32 scroll-mt-24">
+  <div class="reveal max-w-xl mb-12">
+    <p class="text-xs sm:text-sm font-semibold text-clay uppercase tracking-[0.25em] mb-3">FAQ</p>
+    <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight">Good to know.</h2>
+  </div>
+
+  <div class="reveal reveal-delay-1 divide-y divide-ink/10 dark:divide-sand/10 border-y border-ink/10 dark:border-sand/10">
+    <details class="group py-6">
+      <summary class="flex items-center justify-between gap-4">
+        <span class="font-display text-lg sm:text-xl">What kind of projects do you take on?</span>
+        <span class="acc-icon shrink-0 w-7 h-7 grid place-items-center rounded-full border border-ink/15 dark:border-sand/20 text-lg">+</span>
+      </summary>
+      <p class="acc-body text-ink/65 dark:text-sand/65 leading-relaxed mt-4 max-w-xl">Mostly small to mid-sized websites — portfolios, landing pages, and interactive interfaces — where design and clean code matter equally.</p>
+    </details>
+    <details class="group py-6">
+      <summary class="flex items-center justify-between gap-4">
+        <span class="font-display text-lg sm:text-xl">Do you work with clients remotely?</span>
+        <span class="acc-icon shrink-0 w-7 h-7 grid place-items-center rounded-full border border-ink/15 dark:border-sand/20 text-lg">+</span>
+      </summary>
+      <p class="acc-body text-ink/65 dark:text-sand/65 leading-relaxed mt-4 max-w-xl">Yes — all collaboration happens remotely, over email and calls, regardless of where you're based.</p>
+    </details>
+    <details class="group py-6">
+      <summary class="flex items-center justify-between gap-4">
+        <span class="font-display text-lg sm:text-xl">What's the best way to reach you?</span>
+        <span class="acc-icon shrink-0 w-7 h-7 grid place-items-center rounded-full border border-ink/15 dark:border-sand/20 text-lg">+</span>
+      </summary>
+      <p class="acc-body text-ink/65 dark:text-sand/65 leading-relaxed mt-4 max-w-xl">Email is best — <a href="mailto:shehzaadi2010@gmail.com" class="text-clay underline underline-offset-4">shehzaadi2010@gmail.com</a>. I usually reply within a day or two.</p>
+    </details>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="max-w-6xl mx-auto px-6 md:px-10 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-ink/50">
-  <p>© 2026 Gurpreet Kaur. All rights reserved.</p>
-  <p class="font-display text-ink/70">Designed &amp; built with care.</p>
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="max-w-6xl mx-auto px-5 sm:px-8 py-24 md:py-32 scroll-mt-24">
+  <div class="reveal relative rounded-[36px] bg-ink dark:bg-sand/[0.05] text-sand px-6 sm:px-12 py-16 md:px-16 md:py-20 overflow-hidden grain border border-ink dark:border-sand/10">
+    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-clay/25 blur-3xl"></div>
+    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-teal/20 blur-3xl"></div>
+
+    <div class="relative grid lg:grid-cols-2 gap-14 items-start">
+      <div class="text-center lg:text-left">
+        <span class="relative inline-flex items-center gap-2 text-sm font-medium text-gold mb-5">
+          <span class="relative inline-flex w-2 h-2"><span class="pulse-dot absolute inline-flex w-2 h-2 rounded-full text-gold"></span><span class="relative w-2 h-2 rounded-full bg-current"></span></span>
+          Open to new projects
+        </span>
+        <p class="text-sm font-medium text-clay uppercase tracking-[0.2em] mb-4">Let's connect</p>
+        <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight">
+          Have a project in mind? I'd love to hear about it.
+        </h2>
+        <p class="mt-5 text-sand/70 max-w-md mx-auto lg:mx-0">
+          I'm open to creative collaborations, freelance web projects, and new opportunities.
+        </p>
+        <a href="mailto:shehzaadi2010@gmail.com" class="magnetic group relative inline-flex items-center gap-2 mt-9 px-8 py-4 rounded-full bg-sand text-ink font-medium overflow-hidden">
+          <span class="relative z-10 transition-colors group-hover:text-sand">Send me an email</span>
+          <svg class="relative z-10 w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:text-sand" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          <span class="absolute inset-0 bg-clay scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+        </a>
+      </div>
+
+      <!-- contact form -->
+      <form id="contactForm" class="relative space-y-4" novalidate>
+        <div id="formFields" class="space-y-4">
+          <div>
+            <label for="name" class="block text-xs uppercase tracking-[0.15em] text-sand/60 mb-2">Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name"
+              class="w-full bg-transparent border-b border-sand/25 focus:border-clay py-2.5 text-sand placeholder:text-sand/30 outline-none transition-colors" placeholder="Your name">
+          </div>
+          <div>
+            <label for="email" class="block text-xs uppercase tracking-[0.15em] text-sand/60 mb-2">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+              class="w-full bg-transparent border-b border-sand/25 focus:border-clay py-2.5 text-sand placeholder:text-sand/30 outline-none transition-colors" placeholder="you@example.com">
+          </div>
+          <div>
+            <label for="message" class="block text-xs uppercase tracking-[0.15em] text-sand/60 mb-2">Message</label>
+            <textarea id="message" name="message" rows="3" required
+              class="w-full bg-transparent border-b border-sand/25 focus:border-clay py-2.5 text-sand placeholder:text-sand/30 outline-none transition-colors resize-none" placeholder="Tell me about your project"></textarea>
+          </div>
+          <button type="submit" class="magnetic w-full sm:w-auto px-7 py-3.5 rounded-full bg-clay text-sand font-medium hover:bg-gold hover:text-ink transition-colors">Send message</button>
+          <p class="text-xs text-sand/40 leading-relaxed">This form opens your email client with your message pre-filled — nothing is stored or sent automatically.</p>
+        </div>
+
+        <!-- success state -->
+        <div id="formSuccess" class="hidden flex-col items-center justify-center text-center gap-3 py-10">
+          <svg class="check-draw w-12 h-12 text-gold" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p class="font-display text-xl">Message ready</p>
+          <p class="text-sand/60 text-sm max-w-xs">Your email client should be opening now — thanks for reaching out.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="max-w-6xl mx-auto px-5 sm:px-8 pb-10">
+  <div class="divider text-ink dark:text-sand mb-8"></div>
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-5 text-sm text-ink/50 dark:text-sand/50">
+    <p>© <span id="year"></span> Gurpreet Kaur. All rights reserved.</p>
+
+    <div class="flex items-center gap-5">
+      <a href="mailto:shehzaadi2010@gmail.com" aria-label="Email" class="hover:text-clay transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6 9-6M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>
+      </a>
+      <p class="font-display text-ink/70 dark:text-sand/70">Designed &amp; built with care.</p>
+    </div>
+
+    <button id="toTop" aria-label="Back to top" class="w-10 h-10 rounded-full grid place-items-center border border-ink/15 dark:border-sand/15 hover:border-clay hover:text-clay transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M12 4v16"/></svg>
+    </button>
+  </div>
 </footer>
 
 <script>
-  // scroll progress bar
+  /* ============ Loading screen ============ */
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('done'), 900);
+  });
+
+  /* ============ Theme (dark mode + persistence) ============ */
+  const root = document.documentElement;
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (stored ? stored === 'dark' : prefersDark) root.classList.add('dark');
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    root.classList.toggle('dark');
+    localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+  });
+
+  /* ============ Scroll progress bar ============ */
   const progress = document.getElementById('progress');
-  window.addEventListener('scroll', () => {
+  function updateProgress() {
     const h = document.documentElement;
     const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
     progress.style.width = scrolled + '%';
-  });
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
 
-  // reveal on scroll
+  /* ============ Scroll reveal ============ */
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('active');
-        io.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('active'); io.unobserve(e.target); }
     });
   }, { threshold: 0.15 });
   reveals.forEach(el => io.observe(el));
 
-  // mobile menu
+  /* ============ Skill bars ============ */
+  const bars = document.querySelectorAll('.skill-bar');
+  const barIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.width = e.target.dataset.level + '%'; barIo.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(b => barIo.observe(b));
+
+  /* ============ Animated counters ============ */
+  const counters = document.querySelectorAll('.stat-num');
+  const countIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, target = parseInt(el.dataset.count, 10), dur = 1100, start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      countIo.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  counters.forEach(c => countIo.observe(c));
+
+  /* ============ Mobile menu ============ */
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
-  const bar1 = document.getElementById('bar1');
-  const bar2 = document.getElementById('bar2');
-  const bar3 = document.getElementById('bar3');
+  const bar1 = document.getElementById('bar1'), bar2 = document.getElementById('bar2'), bar3 = document.getElementById('bar3');
   let open = false;
+  function closeMenu() {
+    open = false;
+    menuBtn.setAttribute('aria-expanded', false);
+    mobileMenu.classList.remove('open');
+    bar1.style.transform = ''; bar3.style.transform = ''; bar2.style.opacity = '1';
+    document.body.style.overflow = '';
+  }
   menuBtn.addEventListener('click', () => {
     open = !open;
     menuBtn.setAttribute('aria-expanded', open);
-    mobileMenu.style.maxHeight = open ? mobileMenu.scrollHeight + 'px' : '0px';
+    mobileMenu.classList.toggle('open', open);
     bar1.style.transform = open ? 'translateY(6.5px) rotate(45deg)' : '';
     bar3.style.transform = open ? 'translateY(-6.5px) rotate(-45deg)' : '';
     bar2.style.opacity = open ? '0' : '1';
+    document.body.style.overflow = open ? 'hidden' : '';
   });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    open = false;
-    menuBtn.setAttribute('aria-expanded', false);
-    mobileMenu.style.maxHeight = '0px';
-    bar1.style.transform = ''; bar3.style.transform = ''; bar2.style.opacity = '1';
-  }));
+  document.querySelectorAll('[data-nav-mobile]').forEach(a => a.addEventListener('click', closeMenu));
+
+  /* ============ Active nav highlighting ============ */
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = ['about', 'work', 'faq', 'contact'].map(id => document.getElementById(id)).filter(Boolean);
+  const navIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = document.querySelector(`[data-nav][href="#${entry.target.id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting) { navLinks.forEach(l => l.classList.remove('active-link')); link.classList.add('active-link'); }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => navIo.observe(s));
+
+  /* ============ Magnetic buttons (desktop only) ============ */
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) * 0.25;
+        const y = (e.clientY - r.top - r.height / 2) * 0.35;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+
+    /* ============ Cursor spotlight ============ */
+    const spotlight = document.getElementById('spotlight');
+    document.addEventListener('mousemove', (e) => {
+      spotlight.style.left = e.clientX + 'px';
+      spotlight.style.top = e.clientY + 'px';
+      spotlight.classList.add('active');
+    });
+    document.addEventListener('mouseleave', () => spotlight.classList.remove('active'));
+
+    /* ============ Hero mouse parallax ============ */
+    const hero = document.getElementById('home');
+    const blobs = [document.getElementById('blobA'), document.getElementById('blobB'), document.getElementById('blobC')];
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      blobs.forEach((b, i) => {
+        if (!b) return;
+        const strength = (i + 1) * 14;
+        b.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+      });
+    });
+  }
+
+  /* ============ Back to top ============ */
+  const toTop = document.getElementById('toTop');
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ============ Contact form -> mailto + success animation ============ */
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim(), email = form.email.value.trim(), message = form.message.value.trim();
+    if (!name || !email || !message) return;
+    const subject = encodeURIComponent(`Project inquiry from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:shehzaadi2010@gmail.com?subject=${subject}&body=${body}`;
+    document.getElementById('formFields').classList.add('hidden');
+    const success = document.getElementById('formSuccess');
+    success.classList.remove('hidden');
+    success.classList.add('flex');
+  });
+
+  /* ============ Footer year ============ */
+  document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
