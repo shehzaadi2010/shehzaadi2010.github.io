@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gurpreet Kaur | Cute Portfolio</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --primary:#ff8fab;
+    --secondary:#ffb3c6;
+    --accent:#ff69b4;
+    --bg:#fff0f5;
+    --card:#ffffffcc;
+    --text:#5a3e4d;
+    --muted:#8d6b7a;
+}
+
+body{
+    background:linear-gradient(135deg,#fff0f5,#ffe5ec,#fff0f5);
+    color:var(--text);
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* Floating Background Elements */
+
+.flower{
+    position:fixed;
+    font-size:2rem;
+    opacity:0.7;
+    animation:float 15s linear infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+.flower:nth-child(1){left:5%;animation-delay:0s;}
+.flower:nth-child(2){left:20%;animation-delay:2s;}
+.flower:nth-child(3){left:35%;animation-delay:4s;}
+.flower:nth-child(4){left:50%;animation-delay:6s;}
+.flower:nth-child(5){left:65%;animation-delay:8s;}
+.flower:nth-child(6){left:80%;animation-delay:10s;}
+.flower:nth-child(7){left:95%;animation-delay:12s;}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh) rotate(0deg);
+    }
+    100%{
+        transform:translateY(-120px) rotate(360deg);
+    }
+}
+
+/* Butterflies */
+
+.butterfly{
+    position:fixed;
+    font-size:2rem;
+    animation:fly 18s linear infinite;
+    z-index:1;
+}
+
+.butterfly2{
+    animation-delay:8s;
+}
+
+@keyframes fly{
+    0%{
+        left:-50px;
+        top:20%;
+    }
+    100%{
+        left:110%;
+        top:70%;
+    }
+}
+
+/* Header */
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(12px);
+    z-index:1000;
+    border-bottom:1px solid #ffd6e0;
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    padding:1rem 2rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    text-decoration:none;
+    font-size:1.8rem;
+    font-weight:800;
+    color:var(--accent);
+}
+
+.nav-links{
+    list-style:none;
+    display:flex;
+    gap:2rem;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+/* Hero */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:2rem;
+}
+
+.hero-content{
+    max-width:850px;
+    animation:fadeUp 1s ease forwards;
+}
+
+.hero-icons{
+    font-size:3rem;
+    margin-bottom:1rem;
+    animation:bounce 3s infinite;
+}
+
+.hero h1{
+    font-size:4rem;
+    color:var(--accent);
+    margin-bottom:1rem;
+    text-shadow:0 0 20px rgba(255,105,180,.3);
+}
+
+.hero p{
+    font-size:1.2rem;
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:2rem;
+}
+
+.cta-btn{
+    display:inline-block;
+    padding:1rem 2rem;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff8fab,#ff69b4);
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow:0 8px 20px rgba(255,105,180,.25);
+}
+
+.cta-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* Sections */
+
+section{
+    max-width:1200px;
+    margin:auto;
+    padding:6rem 2rem;
+    position:relative;
+    z-index:2;
+}
+
+.section-title{
+    text-align:center;
+    font-size:2.5rem;
+    color:var(--accent);
+    margin-bottom:3rem;
+}
+
+.section-title::after{
+    content:"🌸";
+    display:block;
+    margin-top:10px;
+}
+
+/* About */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:3rem;
+}
+
+.about-text p{
+    margin-bottom:1rem;
+    line-height:1.8;
+}
+
+.info-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+}
+
+.info-card{
+    background:var(--card);
+    backdrop-filter:blur(10px);
+    border-radius:25px;
+    padding:1.5rem;
+    border:2px solid #ffd6e0;
+    box-shadow:0 8px 20px rgba(255,105,180,.15);
+    transition:.3s;
+}
+
+.info-card:hover{
+    transform:translateY(-5px) scale(1.03);
+}
+
+.info-card h3{
+    color:var(--accent);
+    margin-bottom:.5rem;
+}
+
+/* Skills */
+
+.skills-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:2rem;
+}
+
+.skill-box{
+    background:var(--card);
+    backdrop-filter:blur(10px);
+    padding:2rem;
+    border-radius:25px;
+    text-align:center;
+    border:2px solid #ffd6e0;
+    box-shadow:0 8px 20px rgba(255,105,180,.15);
+    transition:.3s;
+}
+
+.skill-box:hover{
+    transform:translateY(-8px);
+}
+
+.skill-box h3{
+    color:var(--accent);
+    margin-bottom:1rem;
+}
+
+.skill-box p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* Contact */
+
+.contact-content{
+    text-align:center;
+    max-width:700px;
+    margin:auto;
+}
+
+.contact-content p{
+    line-height:1.8;
+    margin-bottom:2rem;
+}
+
+/* Footer */
+
+footer{
+    text-align:center;
+    padding:2rem;
+    color:var(--muted);
+}
+
+/* Reveal */
+
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all .8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes bounce{
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+@media(max-width:768px){
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:2.5rem;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .info-cards{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<div class="flower">🌸</div>
+<div class="flower">🌷</div>
+<div class="flower">🌼</div>
+<div class="flower">🌺</div>
+<div class="flower">🌻</div>
+<div class="flower">🌸</div>
+<div class="flower">🌷</div>
+
+<div class="butterfly">🦋</div>
+<div class="butterfly butterfly2">🦋</div>
+
+<header>
+<div class="nav-container">
+<a href="#" class="logo">GK. 💖</a>
+
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#experience">Expertise</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+</header>
+
+<section id="home" class="hero">
+<div class="hero-content">
+
+<div class="hero-icons">
+🐰 🌸 🧸 💖 🌈 🦋
+</div>
+
+<h1>Hi, I'm Gurpreet Kaur ✨</h1>
+
+<p>
+A 19-year-old tech enthusiast and creative web designer who loves building beautiful, cute, interactive, and user-friendly digital experiences.
+</p>
+
+<a href="#about" class="cta-btn">🌸 Learn More</a>
+
+</div>
+</section>
+
+<section id="about" class="reveal">
+
+<h2 class="section-title">About Me</h2>
+
+<div class="about-grid">
+
+<div class="about-text">
+
+<p>
+Hello! I am Gurpreet, a passionate individual from the beautiful village of Singh Bhagwantpur in Roopnagar, Punjab.
+</p>
+
+<p>
+I completed my 12th standard education at Government Senior Secondary School, Singh Bhagwantpur.
+</p>
+
+<p>
+My interest in technology inspired me to pursue computing training at the Sainik Institute of Management and Technology, where I began my journey into modern web development.
+</p>
+
+</div>
+
+<div class="info-cards">
+
+<div class="info-card">
+<h3>📍 Location</h3>
+<p>Singh Bhagwantpur, Punjab</p>
+</div>
+
+<div class="info-card">
+<h3>🎂 Age</h3>
+<p>19 Years Old</p>
+</div>
+
+<div class="info-card">
+<h3>🎓 Education</h3>
+<p>12th Standard</p>
+</div>
+
+<div class="info-card">
+<h3>💻 Training</h3>
+<p>SIMT Certified</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section id="experience" class="reveal">
+
+<h2 class="section-title">My Expertise</h2>
+
+<div class="skills-container">
+
+<div class="skill-box">
+<h3>🌷 UI / UX Design</h3>
+<p>
+Creating responsive and attractive interfaces that look amazing on every device.
+</p>
+</div>
+
+<div class="skill-box">
+<h3>💖 Web Development</h3>
+<p>
+Building modern websites using clean code, creativity, and functionality.
+</p>
+</div>
+
+<div class="skill-box">
+<h3>🦋 Animation Effects</h3>
+<p>
+Adding smooth animations and interactive experiences that engage visitors.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact" class="reveal">
+
+<div class="contact-content">
+
+<h2 class="section-title">Let's Connect</h2>
+
+<p>
+I'm always excited about creative collaborations, web projects, and new opportunities.
+</p>
+
+<a href="mailto:your.email@example.com" class="cta-btn">
+💌 Send Me an Email
+</a>
+
+</div>
+
+</section>
+
+<footer>
+<p>🌸 © 2026 Gurpreet Kaur • Made with Love 💖 🌸</p>
+</footer>
+
+<script>
+window.addEventListener('scroll', revealElements);
+
+function revealElements(){
+const reveals=document.querySelectorAll('.reveal');
+
+reveals.forEach(element=>{
+const windowHeight=window.innerHeight;
+const elementTop=element.getBoundingClientRect().top;
+
+if(elementTop < windowHeight - 150){
+element.classList.add('active');
+}
+});
+}
+
+document.addEventListener('DOMContentLoaded',revealElements);
+</script>
+
+</body>
+</html>
