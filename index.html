@@ -1,513 +1,342 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gurpreet Kaur | Cute Portfolio</title>
-
+<title>Gurpreet Kaur — Web Designer & Developer</title>
+<meta name="description" content="Portfolio of Gurpreet Kaur, web designer and developer from Punjab, India.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#221A22',
+          clay: '#C1502E',
+          rust: '#8C3B26',
+          sand: '#FBF7F0',
+          sandDeep: '#F0E6D6',
+          teal: '#2F5D5A',
+          gold: '#D9A441',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          body: ['Inter', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-    scroll-behavior:smooth;
-}
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background-color: #FBF6EF; }
+  .font-display { font-family: 'Fraunces', serif; }
 
-:root{
-    --primary:#ff8fab;
-    --secondary:#ffb3c6;
-    --accent:#ff69b4;
-    --bg:#fff0f5;
-    --card:#ffffffcc;
-    --text:#5a3e4d;
-    --muted:#8d6b7a;
-}
+  ::selection { background: #B9543A; color: #FBF6EF; }
 
-body{
-    background:linear-gradient(135deg,#fff0f5,#ffe5ec,#fff0f5);
-    color:var(--text);
-    overflow-x:hidden;
-    position:relative;
-}
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1.active { transition-delay: .08s; }
+  .reveal-delay-2.active { transition-delay: .16s; }
+  .reveal-delay-3.active { transition-delay: .24s; }
 
-/* Floating Background Elements */
+  /* Signature underline */
+  .ink-underline { position: relative; display: inline-block; }
+  .ink-underline svg { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; }
 
-.flower{
-    position:fixed;
-    font-size:2rem;
-    opacity:0.7;
-    animation:float 15s linear infinite;
-    pointer-events:none;
-    z-index:0;
-}
+  /* Number eyebrow rule */
+  .rule { height: 1px; background: linear-gradient(90deg, #B9543A 0%, transparent 100%); }
 
-.flower:nth-child(1){left:5%;animation-delay:0s;}
-.flower:nth-child(2){left:20%;animation-delay:2s;}
-.flower:nth-child(3){left:35%;animation-delay:4s;}
-.flower:nth-child(4){left:50%;animation-delay:6s;}
-.flower:nth-child(5){left:65%;animation-delay:8s;}
-.flower:nth-child(6){left:80%;animation-delay:10s;}
-.flower:nth-child(7){left:95%;animation-delay:12s;}
+  /* Marquee */
+  .marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-@keyframes float{
-    0%{
-        transform:translateY(100vh) rotate(0deg);
-    }
-    100%{
-        transform:translateY(-120px) rotate(360deg);
-    }
-}
+  /* Card hover lift */
+  .lift { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease; }
+  .lift:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -16px rgba(36,27,31,.25); }
 
-/* Butterflies */
+  /* Cursor dot follower for hero (decorative, desktop only) */
+  .grain::before{
+    content:"";
+    position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 
-.butterfly{
-    position:fixed;
-    font-size:2rem;
-    animation:fly 18s linear infinite;
-    z-index:1;
-}
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .marquee-track { animation: none; }
+  }
 
-.butterfly2{
-    animation-delay:8s;
-}
-
-@keyframes fly{
-    0%{
-        left:-50px;
-        top:20%;
-    }
-    100%{
-        left:110%;
-        top:70%;
-    }
-}
-
-/* Header */
-
-header{
-    position:fixed;
-    top:0;
-    width:100%;
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(12px);
-    z-index:1000;
-    border-bottom:1px solid #ffd6e0;
-}
-
-.nav-container{
-    max-width:1200px;
-    margin:auto;
-    padding:1rem 2rem;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    text-decoration:none;
-    font-size:1.8rem;
-    font-weight:800;
-    color:var(--accent);
-}
-
-.nav-links{
-    list-style:none;
-    display:flex;
-    gap:2rem;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:var(--text);
-    font-weight:600;
-}
-
-.nav-links a:hover{
-    color:var(--accent);
-}
-
-/* Hero */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:2rem;
-}
-
-.hero-content{
-    max-width:850px;
-    animation:fadeUp 1s ease forwards;
-}
-
-.hero-icons{
-    font-size:3rem;
-    margin-bottom:1rem;
-    animation:bounce 3s infinite;
-}
-
-.hero h1{
-    font-size:4rem;
-    color:var(--accent);
-    margin-bottom:1rem;
-    text-shadow:0 0 20px rgba(255,105,180,.3);
-}
-
-.hero p{
-    font-size:1.2rem;
-    color:var(--muted);
-    line-height:1.8;
-    margin-bottom:2rem;
-}
-
-.cta-btn{
-    display:inline-block;
-    padding:1rem 2rem;
-    border-radius:50px;
-    background:linear-gradient(135deg,#ff8fab,#ff69b4);
-    color:white;
-    text-decoration:none;
-    font-weight:700;
-    box-shadow:0 8px 20px rgba(255,105,180,.25);
-}
-
-.cta-btn:hover{
-    transform:translateY(-3px);
-}
-
-/* Sections */
-
-section{
-    max-width:1200px;
-    margin:auto;
-    padding:6rem 2rem;
-    position:relative;
-    z-index:2;
-}
-
-.section-title{
-    text-align:center;
-    font-size:2.5rem;
-    color:var(--accent);
-    margin-bottom:3rem;
-}
-
-.section-title::after{
-    content:"🌸";
-    display:block;
-    margin-top:10px;
-}
-
-/* About */
-
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:3rem;
-}
-
-.about-text p{
-    margin-bottom:1rem;
-    line-height:1.8;
-}
-
-.info-cards{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1rem;
-}
-
-.info-card{
-    background:var(--card);
-    backdrop-filter:blur(10px);
-    border-radius:25px;
-    padding:1.5rem;
-    border:2px solid #ffd6e0;
-    box-shadow:0 8px 20px rgba(255,105,180,.15);
-    transition:.3s;
-}
-
-.info-card:hover{
-    transform:translateY(-5px) scale(1.03);
-}
-
-.info-card h3{
-    color:var(--accent);
-    margin-bottom:.5rem;
-}
-
-/* Skills */
-
-.skills-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:2rem;
-}
-
-.skill-box{
-    background:var(--card);
-    backdrop-filter:blur(10px);
-    padding:2rem;
-    border-radius:25px;
-    text-align:center;
-    border:2px solid #ffd6e0;
-    box-shadow:0 8px 20px rgba(255,105,180,.15);
-    transition:.3s;
-}
-
-.skill-box:hover{
-    transform:translateY(-8px);
-}
-
-.skill-box h3{
-    color:var(--accent);
-    margin-bottom:1rem;
-}
-
-.skill-box p{
-    color:var(--muted);
-    line-height:1.7;
-}
-
-/* Contact */
-
-.contact-content{
-    text-align:center;
-    max-width:700px;
-    margin:auto;
-}
-
-.contact-content p{
-    line-height:1.8;
-    margin-bottom:2rem;
-}
-
-/* Footer */
-
-footer{
-    text-align:center;
-    padding:2rem;
-    color:var(--muted);
-}
-
-/* Reveal */
-
-.reveal{
-    opacity:0;
-    transform:translateY(40px);
-    transition:all .8s ease;
-}
-
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes bounce{
-    50%{
-        transform:translateY(-10px);
-    }
-}
-
-@media(max-width:768px){
-
-    .about-grid{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:2.5rem;
-    }
-
-    .nav-links{
-        display:none;
-    }
-
-    .info-cards{
-        grid-template-columns:1fr;
-    }
-}
+  /* visible focus states */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #B9543A; outline-offset: 3px; border-radius: 2px;
+  }
 </style>
-
 </head>
-<body>
+<body class="text-ink antialiased">
 
-<div class="flower">🌸</div>
-<div class="flower">🌷</div>
-<div class="flower">🌼</div>
-<div class="flower">🌺</div>
-<div class="flower">🌻</div>
-<div class="flower">🌸</div>
-<div class="flower">🌷</div>
+<!-- progress bar -->
+<div id="progress" class="fixed top-0 left-0 h-[3px] bg-clay z-[60]" style="width:0%"></div>
 
-<div class="butterfly">🦋</div>
-<div class="butterfly butterfly2">🦋</div>
+<!-- HEADER -->
+<header class="fixed top-0 w-full z-50 bg-sand/85 backdrop-blur-md border-b border-ink/10">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+    <a href="#home" class="font-display text-xl tracking-tight">Gurpreet Kaur</a>
 
-<header>
-<div class="nav-container">
-<a href="#" class="logo">GK. 💖</a>
+    <nav class="hidden md:flex items-center gap-10 font-medium text-sm">
+      <a href="#about" class="hover:text-clay transition-colors">About</a>
+      <a href="#work" class="hover:text-clay transition-colors">Expertise</a>
+      <a href="#contact" class="hover:text-clay transition-colors">Contact</a>
+      <a href="#contact" class="px-4 py-2 rounded-full bg-ink text-sand hover:bg-clay transition-colors">Get in touch</a>
+    </nav>
 
-<ul class="nav-links">
-<li><a href="#home">Home</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#experience">Expertise</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-</div>
+    <button id="menuBtn" aria-label="Open menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5">
+      <span class="block w-6 h-[2px] bg-ink transition-all" id="bar1"></span>
+      <span class="block w-6 h-[2px] bg-ink transition-all" id="bar2"></span>
+      <span class="block w-6 h-[2px] bg-ink transition-all" id="bar3"></span>
+    </button>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out border-t border-ink/10 bg-sand">
+    <nav class="flex flex-col px-6 py-4 gap-4 font-medium">
+      <a href="#about" class="py-1">About</a>
+      <a href="#work" class="py-1">Expertise</a>
+      <a href="#contact" class="py-1">Contact</a>
+    </nav>
+  </div>
 </header>
 
-<section id="home" class="hero">
-<div class="hero-content">
+<!-- HERO -->
+<section id="home" class="relative grain overflow-hidden min-h-screen flex items-center pt-16">
+  <div class="absolute -top-20 -right-32 w-[460px] h-[460px] rounded-full bg-clay/10 blur-3xl"></div>
+  <div class="absolute bottom-0 -left-20 w-[320px] h-[320px] rounded-full bg-teal/10 blur-3xl"></div>
 
-<div class="hero-icons">
-🐰 🌸 🧸 💖 🌈 🦋
-</div>
+  <div class="max-w-6xl mx-auto px-6 md:px-10 w-full grid md:grid-cols-12 gap-10 items-center relative z-10">
 
-<h1>Hi, I'm Gurpreet Kaur ✨</h1>
+    <div class="md:col-span-8">
+      <p class="reveal flex items-center gap-3 text-sm font-medium text-clay mb-6 uppercase tracking-[0.2em]">
+        <span class="w-8 h-px bg-clay"></span> Web Designer &amp; Developer · Punjab, India
+      </p>
 
-<p>
-A 19-year-old tech enthusiast and creative web designer who loves building beautiful, cute, interactive, and user-friendly digital experiences.
-</p>
+      <h1 class="reveal reveal-delay-1 font-display text-[2.6rem] leading-[1.08] sm:text-6xl md:text-7xl font-medium tracking-tight">
+        I design and build
+        <span class="ink-underline">
+          warm, usable
+          <svg viewBox="0 0 200 10" preserveAspectRatio="none"><path d="M2 7 C 50 1, 150 1, 198 7" stroke="#B9543A" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        </span>
+        interfaces.
+      </h1>
 
-<a href="#about" class="cta-btn">🌸 Learn More</a>
+      <p class="reveal reveal-delay-2 mt-7 text-lg text-ink/70 max-w-xl leading-relaxed">
+        I'm Gurpreet — a 19-year-old developer from Singh Bhagwantpur, Punjab, turning early curiosity about computers into clean, considered websites.
+      </p>
 
-</div>
+      <div class="reveal reveal-delay-3 mt-9 flex flex-wrap items-center gap-4">
+        <a href="#contact" class="px-7 py-3.5 rounded-full bg-ink text-sand font-medium hover:bg-clay transition-colors">Start a project</a>
+        <a href="#work" class="px-7 py-3.5 rounded-full border border-ink/20 font-medium hover:border-clay hover:text-clay transition-colors">See my expertise</a>
+      </div>
+    </div>
+
+    <div class="md:col-span-4 reveal reveal-delay-2">
+      <div class="relative rounded-[28px] overflow-hidden border border-ink/10 shadow-[0_30px_60px_-30px_rgba(34,26,34,.4)] aspect-[4/5]">
+        <img src="gurpreet.png" alt="Portrait of Gurpreet Kaur" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/0 to-ink/0"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5 text-sand">
+          <p class="font-display text-2xl leading-none">Gurpreet Kaur</p>
+          <p class="text-xs text-sand/75 mt-1 uppercase tracking-[0.15em]">Web Designer &amp; Developer</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="#about" aria-label="Scroll to about section" class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-xs text-ink/50">
+    <span>Scroll</span>
+    <span class="w-px h-8 bg-ink/30 animate-pulse"></span>
+  </a>
 </section>
 
-<section id="about" class="reveal">
-
-<h2 class="section-title">About Me</h2>
-
-<div class="about-grid">
-
-<div class="about-text">
-
-<p>
-Hello! I am Gurpreet, a passionate individual from the beautiful village of Singh Bhagwantpur in Roopnagar, Punjab.
-</p>
-
-<p>
-I completed my 12th standard education at Government Senior Secondary School, Singh Bhagwantpur.
-</p>
-
-<p>
-My interest in technology inspired me to pursue computing training at the Sainik Institute of Management and Technology, where I began my journey into modern web development.
-</p>
-
+<!-- marquee strip -->
+<div class="border-y border-ink/10 bg-ink text-sand py-3 overflow-hidden">
+  <div class="marquee-track text-sm tracking-[0.25em] uppercase font-medium">
+    <span class="px-6">UI / UX Design</span><span class="px-6">·</span>
+    <span class="px-6">Web Development</span><span class="px-6">·</span>
+    <span class="px-6">Interaction &amp; Motion</span><span class="px-6">·</span>
+    <span class="px-6">Responsive Builds</span><span class="px-6">·</span>
+    <span class="px-6">UI / UX Design</span><span class="px-6">·</span>
+    <span class="px-6">Web Development</span><span class="px-6">·</span>
+    <span class="px-6">Interaction &amp; Motion</span><span class="px-6">·</span>
+    <span class="px-6">Responsive Builds</span><span class="px-6">·</span>
+  </div>
 </div>
 
-<div class="info-cards">
+<!-- ABOUT -->
+<section id="about" class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+  <div class="grid md:grid-cols-12 gap-12 mb-14">
 
-<div class="info-card">
-<h3>📍 Location</h3>
-<p>Singh Bhagwantpur, Punjab</p>
-</div>
+    <div class="md:col-span-4 reveal">
+      <p class="text-sm font-medium text-clay uppercase tracking-[0.2em] mb-3">About</p>
+      <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight">From a Punjab village to the web.</h2>
+    </div>
 
-<div class="info-card">
-<h3>🎂 Age</h3>
-<p>19 Years Old</p>
-</div>
+    <div class="md:col-span-8 reveal reveal-delay-1 grid sm:grid-cols-[auto_1fr] gap-8 items-start">
+      <div class="hidden sm:block w-32 h-32 rounded-2xl overflow-hidden border border-ink/10 shrink-0">
+        <img src="gurpreet.png" alt="Gurpreet Kaur" class="w-full h-full object-cover" />
+      </div>
+      <div>
+        <p class="text-lg leading-relaxed text-ink/75">
+          I grew up in Singh Bhagwantpur, a village in Roopnagar, Punjab, and completed my 12th standard at the local Government Senior Secondary School. Technology pulled me in early — not as a subject to study, but as a way of making things people actually use.
+        </p>
+        <p class="text-lg leading-relaxed text-ink/75 mt-5">
+          That curiosity led me to computing training at the Sainik Institute of Management and Technology, where I started learning web development properly: structuring pages, writing clean code, and caring about how an interface feels, not just how it looks.
+        </p>
+      </div>
+    </div>
 
-<div class="info-card">
-<h3>🎓 Education</h3>
-<p>12th Standard</p>
-</div>
+  </div>
 
-<div class="info-card">
-<h3>💻 Training</h3>
-<p>SIMT Certified</p>
-</div>
-
-</div>
-
-</div>
+  <div class="reveal reveal-delay-1">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
+          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Based in</p>
+          <p class="font-display text-xl">Roopnagar, Punjab</p>
+        </div>
+        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
+          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Education</p>
+          <p class="font-display text-xl">12th Standard, GSSS</p>
+        </div>
+        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
+          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Training</p>
+          <p class="font-display text-xl">SIMT Certified</p>
+        </div>
+        <div class="lift rounded-2xl border border-ink/10 bg-white/70 p-6">
+          <p class="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">Focus</p>
+          <p class="font-display text-xl">Web Design &amp; Dev</p>
+        </div>
+      </div>
+  </div>
 </section>
 
-<section id="experience" class="reveal">
+<!-- EXPERTISE -->
+<section id="work" class="bg-sandDeep border-y border-ink/10">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
 
-<h2 class="section-title">My Expertise</h2>
+    <div class="reveal max-w-xl mb-16">
+      <p class="text-sm font-medium text-clay uppercase tracking-[0.2em] mb-3">Expertise</p>
+      <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight">What I bring to a project.</h2>
+    </div>
 
-<div class="skills-container">
+    <div class="grid md:grid-cols-3 gap-6">
 
-<div class="skill-box">
-<h3>🌷 UI / UX Design</h3>
-<p>
-Creating responsive and attractive interfaces that look amazing on every device.
-</p>
-</div>
+      <div class="reveal lift rounded-3xl bg-white p-8 border border-ink/10">
+        <span class="font-display text-3xl text-clay">01</span>
+        <h3 class="font-display text-2xl mt-4 mb-3">UI / UX Design</h3>
+        <p class="text-ink/65 leading-relaxed">Interfaces planned around how people actually navigate — clear hierarchy, readable type, and layouts that hold up on any screen.</p>
+      </div>
 
-<div class="skill-box">
-<h3>💖 Web Development</h3>
-<p>
-Building modern websites using clean code, creativity, and functionality.
-</p>
-</div>
+      <div class="reveal reveal-delay-1 lift rounded-3xl bg-white p-8 border border-ink/10">
+        <span class="font-display text-3xl text-teal">02</span>
+        <h3 class="font-display text-2xl mt-4 mb-3">Web Development</h3>
+        <p class="text-ink/65 leading-relaxed">Clean, semantic HTML, CSS and JavaScript built for performance and maintainability — from static sites to interactive pages.</p>
+      </div>
 
-<div class="skill-box">
-<h3>🦋 Animation Effects</h3>
-<p>
-Adding smooth animations and interactive experiences that engage visitors.
-</p>
-</div>
+      <div class="reveal reveal-delay-2 lift rounded-3xl bg-white p-8 border border-ink/10">
+        <span class="font-display text-3xl text-gold">03</span>
+        <h3 class="font-display text-2xl mt-4 mb-3">Motion &amp; Interaction</h3>
+        <p class="text-ink/65 leading-relaxed">Purposeful animation — scroll reveals, hover states, transitions — used to guide attention, not distract from it.</p>
+      </div>
 
-</div>
+      <div class="reveal lift rounded-3xl bg-white p-8 border border-ink/10">
+        <span class="font-display text-3xl text-rust">04</span>
+        <h3 class="font-display text-2xl mt-4 mb-3">Responsive Layouts</h3>
+        <p class="text-ink/65 leading-relaxed">Designs that adapt cleanly from a small phone screen to a wide desktop, with Tailwind-driven, mobile-first builds.</p>
+      </div>
 
+      <div class="reveal reveal-delay-1 lift rounded-3xl bg-white p-8 border border-ink/10">
+        <span class="font-display text-3xl text-clay">05</span>
+        <h3 class="font-display text-2xl mt-4 mb-3">Branding &amp; Visual Identity</h3>
+        <p class="text-ink/65 leading-relaxed">Cohesive colour, type and imagery choices that give a site a personality of its own rather than a templated look.</p>
+      </div>
+
+      <div class="reveal reveal-delay-2 lift rounded-3xl bg-white p-8 border border-ink/10">
+        <span class="font-display text-3xl text-teal">06</span>
+        <h3 class="font-display text-2xl mt-4 mb-3">Performance &amp; Best Practices</h3>
+        <p class="text-ink/65 leading-relaxed">Accessible markup, sensible image handling, and lean code that keeps pages fast and easy to maintain.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section id="contact" class="reveal">
-
-<div class="contact-content">
-
-<h2 class="section-title">Let's Connect</h2>
-
-<p>
-I'm always excited about creative collaborations, web projects, and new opportunities.
-</p>
-
-<a href="mailto:your.email@example.com" class="cta-btn">
-💌 Send Me an Email
-</a>
-
-</div>
-
+<!-- CONTACT -->
+<section id="contact" class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+  <div class="rounded-[32px] bg-ink text-sand px-8 py-16 md:px-16 md:py-20 text-center relative overflow-hidden reveal">
+    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-clay/20 blur-3xl"></div>
+    <p class="text-sm font-medium text-clay uppercase tracking-[0.2em] mb-4 relative">Let's connect</p>
+    <h2 class="font-display text-4xl md:text-5xl font-medium leading-tight max-w-2xl mx-auto relative">
+      Have a project in mind? I'd love to hear about it.
+    </h2>
+    <p class="mt-5 text-sand/70 max-w-lg mx-auto relative">
+      I'm open to creative collaborations, freelance web projects, and new opportunities.
+    </p>
+    <a href="mailto:your.email@example.com" class="relative inline-block mt-9 px-8 py-4 rounded-full bg-sand text-ink font-medium hover:bg-clay hover:text-sand transition-colors">
+      Send me an email
+    </a>
+  </div>
 </section>
 
-<footer>
-<p>🌸 © 2026 Gurpreet Kaur • Made with Love 💖 🌸</p>
+<!-- FOOTER -->
+<footer class="max-w-6xl mx-auto px-6 md:px-10 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-ink/50">
+  <p>© 2026 Gurpreet Kaur. All rights reserved.</p>
+  <p class="font-display text-ink/70">Designed &amp; built with care.</p>
 </footer>
 
 <script>
-window.addEventListener('scroll', revealElements);
+  // scroll progress bar
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+  });
 
-function revealElements(){
-const reveals=document.querySelectorAll('.reveal');
+  // reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('active');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
 
-reveals.forEach(element=>{
-const windowHeight=window.innerHeight;
-const elementTop=element.getBoundingClientRect().top;
-
-if(elementTop < windowHeight - 150){
-element.classList.add('active');
-}
-});
-}
-
-document.addEventListener('DOMContentLoaded',revealElements);
+  // mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+  let open = false;
+  menuBtn.addEventListener('click', () => {
+    open = !open;
+    menuBtn.setAttribute('aria-expanded', open);
+    mobileMenu.style.maxHeight = open ? mobileMenu.scrollHeight + 'px' : '0px';
+    bar1.style.transform = open ? 'translateY(6.5px) rotate(45deg)' : '';
+    bar3.style.transform = open ? 'translateY(-6.5px) rotate(-45deg)' : '';
+    bar2.style.opacity = open ? '0' : '1';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    open = false;
+    menuBtn.setAttribute('aria-expanded', false);
+    mobileMenu.style.maxHeight = '0px';
+    bar1.style.transform = ''; bar3.style.transform = ''; bar2.style.opacity = '1';
+  }));
 </script>
 
 </body>
